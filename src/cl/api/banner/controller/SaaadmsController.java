@@ -32,7 +32,7 @@ public class SaaadmsController {
 			callst.setInt("lv_pidm", person.getPidm());
 			callst.setString("lv_term_code", saaadms.getTerm_code());
 			callst.setString("lv_data_origin", saaadms.getData_origin());
-			callst.registerOutParameter("lv_json_out", OracleTypes.VARCHAR);			
+			callst.registerOutParameter("lv_json_out", OracleTypes.VARCHAR);
 			callst.execute();
 
 			saaadms = Mapper.jsonToObject(callst.getString("lv_json_out"), "", Saaadms.class);

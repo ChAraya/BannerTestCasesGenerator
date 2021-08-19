@@ -118,7 +118,8 @@ public class Main {
 		// Obtain fake name from API.
 		String resultado;
 		try {
-			resultado = Http.get(hs.get("apiPersona"), null);
+			Http http = new Http();
+			resultado = http.get(hs.get("apiPersona"), null);
 			// Map the json from API to an Object.
 			Person person = new Person();
 			person = Mapper.jsonToObject(resultado, "", Person.class);

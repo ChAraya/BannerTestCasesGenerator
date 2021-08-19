@@ -1,53 +1,30 @@
 package cl.api.banner.utilities;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.IOException;
 
 public class Http {
+	private final HttpClient httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
 
-	/**
-	 * Obtain json response from API url
-	 * 
-	 * @param uri
-	 * @return json
-	 * @throws Exception
-	 */
-	public static String get(String uri, String apikey) throws Exception {
+	public String get(String uri, String apikey) throws Exception {
+		HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(uri))
+				.setHeader("User-Agent", "Java 11 HttpClient").build();
 
-		String salida = "";
-		String stringbuffer;
+		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-		try {
+		// print status code
+		//System.out.println(response.statusCode());
 
-			URL url = new URL(uri);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
-			if (apikey != null && !apikey.isEmpty())
-				conn.setRequestProperty("x-api-key", apikey);
-
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException(
-						"Falla acceso Servicio : HTTP error code : " + conn.getResponseCode() + ". URI:" + uri);
-			}
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-			while ((stringbuffer = br.readLine()) != null) {
-				salida = salida + stringbuffer;
-			}
-
-			conn.disconnect();
-
-		} catch (Exception e) {
-			throw new RuntimeException("Problemas en el Servicio: " + e.getMessage());
-		}
-
-		return salida;
-
+		// print response body
+		// System.out.println(response.body());
+		return response.body();
 	}
 
 }
