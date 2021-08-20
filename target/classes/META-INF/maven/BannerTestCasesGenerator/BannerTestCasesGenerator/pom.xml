@@ -16,11 +16,7 @@
     </plugins>
   </build>
   <dependencies>
-<<<<<<< HEAD
   	<!-- jackson -->
-=======
-	<!-- jackson -->
->>>>>>> 8cf72d9787f839a4c6fa47689b5e9ada49048286
 	<dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>

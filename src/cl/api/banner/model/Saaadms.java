@@ -23,6 +23,7 @@ public class Saaadms {
 		this.resd_code = "R";
 		this.user = null;
 		this.data_origin = "JAVA";
+		this.term_code = "";
 	}
 
 	public String getTerm_code() {

@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cl.api.banner.controller.SaaadmsController;
-import cl.api.banner.controller.SpaidenController;
+import cl.api.banner.controller.*;
+//import cl.api.banner.controller.SpaidenController;
 import cl.api.banner.model.Person;
 import cl.api.banner.model.Spaiden;
 import cl.api.banner.utilities.Http;
@@ -81,6 +81,8 @@ public class Main {
 						break;
 					case 2:
 						System.out.println("Has seleccionado la opcion 2");
+						createSaaadms(dataHandler, hs, spaiden, termCode);
+						createSgastdn(dataHandler, hs, spaiden);
 						spaiden.printList();
 						break;
 					case 3:
@@ -168,4 +170,30 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	
+	private static void createSgastdn(DataHandler dataHandler, HashMap<String, String> hs, Spaiden spaiden) {
+
+		try {
+			// Open DB Connection
+			dataHandler.jdbcUrl = hs.get("jdbcUrl");
+			dataHandler.userid = hs.get("userid");
+			dataHandler.password = hs.get("password");
+			dataHandler.getDBConnection();
+
+			spaiden.getPersonList().forEach((person) -> {
+
+				try {
+					SgastdnController.create(dataHandler.conn, person);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
