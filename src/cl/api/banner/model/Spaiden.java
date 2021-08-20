@@ -2,6 +2,7 @@ package cl.api.banner.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.isNull;
 
 public class Spaiden {
 	
@@ -29,10 +30,14 @@ public class Spaiden {
 			System.out.println("Name: " +personList.get(i).getName());
 			System.out.println("Pidm: " +personList.get(i).getPidm());
 			
-			if (!personList.get(i).getAdmission().getAppl_no().isEmpty()) {
+			if (!isNull(personList.get(i).getAdmission())) {
 				System.out.println("Program: " +personList.get(i).getAdmission().getProgram());	
-				System.out.println("Camp Code: " +personList.get(i).getAdmission().getCamp_code());	
+				System.out.println("Camp Code: " +personList.get(i).getAdmission().getCamp_code());
+				if (!isNull(personList.get(i).getSgastdn())) {
+					System.out.println("Study Path: " +personList.get(i).getSgastdn().getKey_seqno());					
+				}				
 			}
+			
 			
 			System.out.println("************************************************");
 		}

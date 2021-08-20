@@ -22,6 +22,7 @@ public class Person {
 	private String spriden_data_origin;
 	private String spriden_surname_prefix;
 	private Saaadms admission;
+	private Sgastdn sgastdn;
 	
 	public Person(){
 		this.spriden_id = "GENERATED";
@@ -148,6 +149,14 @@ public class Person {
 
 	public void setAdmission(Saaadms admission) {
 		this.admission = admission;
+	}
+
+	public Sgastdn getSgastdn() {
+		return sgastdn;
+	}
+
+	public void setSgastdn(Sgastdn sgastdn) {
+		this.sgastdn = sgastdn;
 	}
 
 }

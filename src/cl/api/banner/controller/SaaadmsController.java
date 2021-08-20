@@ -9,7 +9,7 @@ import cl.api.banner.utilities.Mapper;
 import oracle.jdbc.internal.OracleTypes;
 
 /**
- * SPAIDEN API controller
+ * SAAADMS API controller
  *
  * @author Juan Chimaja
  * @author Christopher Araya
@@ -37,6 +37,7 @@ public class SaaadmsController {
 
 			saaadms = Mapper.jsonToObject(callst.getString("lv_json_out"), "", Saaadms.class);
 			person.setAdmission(saaadms);
+			System.out.println(person.getAdmission().getTerm_code());
 
 		} catch (Exception e) {
 			throw e;

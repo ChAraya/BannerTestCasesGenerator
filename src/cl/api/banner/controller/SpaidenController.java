@@ -11,6 +11,7 @@ import oracle.jdbc.internal.OracleTypes;
  *
  * @author Luis Ponce
  * @author Christopher Araya
+ * @author Juan Chimaja
  */
 public class SpaidenController {
 	public static void create(Connection conn, Person person) throws Exception {
